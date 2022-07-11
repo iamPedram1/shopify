@@ -7,7 +7,6 @@ import {
   Badge,
   Divider,
   Drawer,
-  Button,
   Typography,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
@@ -17,10 +16,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
 const navBarItems = [
-  { name: "خانه", to: "/home" },
-  { name: "ثبت نام", to: "/register" },
-  { name: "ورود", to: "/login" },
-  { name: "درباره ما", to: "/about-us" },
+  { name: "Home", to: "/" },
+  { name: "Register", to: "/register" },
+  { name: "Login", to: "/login" },
+  { name: "About Us", to: "/about-us" },
 ];
 
 const NavBar = () => {
@@ -84,54 +83,59 @@ const NavBar = () => {
 
   return (
     <>
-      <nav>
-        <AppBar position="static" sx={{ backgroundColor: "#000" }}>
-          <Box margin="0.5rem 1rem">
-            <Grid container justifyContent="space-between" alignItems="center">
-              <Grid item>
-                {/* Desktop NavBar */}
-                <Grid
-                  container
-                  columnSpacing={4}
-                  alignItems="center"
-                  className="desktop__navbar"
+      <AppBar position="sticky" sx={{ backgroundColor: "#000" }}>
+        <Box margin="0.5rem 1rem">
+          <Grid
+            container
+            direction="row-reverse"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Grid item>
+              {/* Desktop NavBar */}
+              <Grid
+                container
+                columnSpacing={4}
+                direction="row-reverse"
+                alignItems="center"
+                className="desktop__navbar"
+              >
+                {navBarItems.map((item, index) => (
+                  <Grid item key={index}>
+                    <NavLink className="navbar__item" to={item.to}>
+                      {item.name}
+                    </NavLink>
+                  </Grid>
+                ))}
+              </Grid>
+              {/* Mobile NavBar */}
+              <Grid item className="mobile__navbar">
+                <IconButton
+                  onClick={toggleDrawer("right", true)}
+                  sx={{ color: "#fff" }}
                 >
-                  {navBarItems.map((item, index) => (
-                    <Grid item key={index}>
-                      <NavLink className="navbar__item" to={item.to}>
-                        {item.name}
-                      </NavLink>
-                    </Grid>
-                  ))}
-                </Grid>
-                {/* Mobile NavBar */}
-                <Grid item className="mobile__navbar">
-                  <IconButton
-                    onClick={toggleDrawer("right", true)}
-                    sx={{ color: "#fff" }}
-                  >
-                    <MenuIcon />
+                  <MenuIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container columnSpacing={2} alignItems="end">
+                <Grid item>
+                  <IconButton sx={{ color: "#fff" }}>
+                    <Badge badgeContent={4} color="error">
+                      <ShoppingCartOutlinedIcon />
+                    </Badge>
                   </IconButton>
                 </Grid>
-              </Grid>
-              <Grid item>
-                <Grid container columnSpacing={2} alignItems="end">
-                  <Grid item>
-                    <IconButton sx={{ color: "#fff" }}>
-                      <Badge badgeContent={4} color="error">
-                        <ShoppingCartOutlinedIcon />
-                      </Badge>
-                    </IconButton>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="h4">Shopify</Typography>
-                  </Grid>
+                <Grid item>
+                  <Typography variant="h4">Shopify</Typography>
                 </Grid>
               </Grid>
             </Grid>
-          </Box>
-        </AppBar>
-      </nav>
+          </Grid>
+        </Box>
+      </AppBar>
+
       <div>
         <Drawer
           anchor="right"
