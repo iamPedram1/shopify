@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import entitiesReducer from "./entities";
+import reducer from "./reducer";
+import api from "./middleware/api";
 
 export default configureStore({
-  reducer: entitiesReducer,
+  reducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api),
 });

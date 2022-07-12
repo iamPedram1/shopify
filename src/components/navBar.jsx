@@ -121,14 +121,14 @@ const NavBar = () => {
             <Grid item>
               <Grid container columnSpacing={2} alignItems="end">
                 <Grid item>
+                  <Typography variant="h4">Shopify</Typography>
+                </Grid>
+                <Grid item>
                   <IconButton sx={{ color: "#fff" }}>
                     <Badge badgeContent={4} color="error">
                       <ShoppingCartOutlinedIcon />
                     </Badge>
                   </IconButton>
-                </Grid>
-                <Grid item>
-                  <Typography variant="h4">Shopify</Typography>
                 </Grid>
               </Grid>
             </Grid>

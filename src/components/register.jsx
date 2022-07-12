@@ -59,7 +59,6 @@ const Register = () => {
     control,
   });
   const onSubmit = (data) => console.log(data, "ERRORS", errors);
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
