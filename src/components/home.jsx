@@ -10,7 +10,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { loadProducts } from "../store/products";
+import { loadProducts } from "../store/state/products";
+import ItemCard from "./common/itemCard";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Home = () => {
     dispatch(loadProducts());
   }, []);
 
-  products.map((item) => console.log("item", item));
+  console.log(products);
   return (
     <>
       <Box sx={{ margin: "2rem 5rem" }}>
@@ -30,32 +31,18 @@ const Home = () => {
           justifyContent="center"
           alignItems="center"
         >
-          {products[0] &&
-            products[0].map((item) => (
-              <Grid item>
-                <div
-                  className="card"
-                  style={{ width: "18rem", height: "400px" }}
-                >
-                  <img
-                    src={item.image}
-                    className="card-img-top"
-                    style={{
-                      width: "100%",
-                      height: "150px",
-                      objectFit: "contain",
-                    }}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{item.title}</h5>
-                    {/* <p className="card-text">{item.description}</p> */}
-                    <a href="#" className="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
+          {products &&
+            products.map((item) => <ItemCard key={item.id} item={item} />)}
+        </Grid>
+      </Box>
+    </>
+  );
+};
 
-                {/* <Card sx={{ width: 345, height: 700 }}>
+export default Home;
+
+{
+  /* <Card sx={{ width: 345, height: 700 }}>
                   <CardMedia
                     component="img"
                     alt="green iguana"
@@ -74,13 +61,5 @@ const Home = () => {
                     <Button size="small">Share</Button>
                     <Button size="small">Learn More</Button>
                   </CardActions>
-                </Card> */}
-              </Grid>
-            ))}
-        </Grid>
-      </Box>
-    </>
-  );
-};
-
-export default Home;
+                </Card> */
+}

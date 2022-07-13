@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "./store/configureStore";
 import "bootstrap/dist/css/bootstrap.min.css";
+// import "antd/dist/antd.css";
 import "./index.css";
 
 const unsubscribe = store.subscribe(() => null);

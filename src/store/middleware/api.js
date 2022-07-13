@@ -1,12 +1,12 @@
 import axios from "axios";
-import * as actions from "../apiCreateAction";
+import * as actions from "../state/products";
 import config from "../../config";
 const api =
-  ({ dispatch }) =>
+  ({ dispatch, getState }) =>
   (next) =>
   async (action) => {
     if (action.type !== actions.apiCallBegan.type) return next(action);
-
+    if (getState().entities.products.length !== 0) return;
     const { method, data, onStart, onSuccess, onError } = action.payload;
 
     if (onStart) dispatch({ type: onStart });

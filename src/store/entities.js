@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import user from "./user";
-import products from "./products";
+import user from "./state/user";
+import products from "./state/products";
 
 export default combineReducers({
   user,
