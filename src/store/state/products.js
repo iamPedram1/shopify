@@ -8,12 +8,11 @@ export const apiCallFailed = createAction("api/callFailed");
 
 //Create Reducer
 const slice = createSlice({
-  name: "product",
+  name: "products",
   initialState: [],
   reducers: {
-    productsReceived: (data, action) => {
-      action.payload.forEach((item) => data.push(item));
-    },
+    productsReceived: (data, action) =>
+      action.payload.forEach((item) => data.push(item)),
     productsReceiveFailed: (data, action) => {},
   },
 });

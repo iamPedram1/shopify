@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -23,6 +24,8 @@ const navBarItems = [
 ];
 
 const NavBar = () => {
+  const cart = useSelector((state) => state.entities.shoppingCart);
+
   const [drawerDirection, setDrawerDirection] = useState({
     right: false,
   });
@@ -125,7 +128,10 @@ const NavBar = () => {
                 </Grid>
                 <Grid item>
                   <IconButton sx={{ color: "#fff" }}>
-                    <Badge badgeContent={4} color="error">
+                    <Badge
+                      badgeContent={cart.length !== 0 ? cart.length : "0"}
+                      color="error"
+                    >
                       <ShoppingCartOutlinedIcon />
                     </Badge>
                   </IconButton>

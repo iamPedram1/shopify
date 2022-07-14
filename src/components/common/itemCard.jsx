@@ -1,19 +1,25 @@
+import { useState } from "react";
 import { Grid } from "@mui/material";
+import { titleCase } from "../../services/service";
+import { useDispatch, useSelector } from "react-redux";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
-function titleCase(str) {
-  let splitStr = str.toLowerCase().split(" ");
-  for (let i = 0; i < splitStr.length; i++) {
-    splitStr[i] =
-      splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-  }
-  return splitStr.join(" ");
-}
+import { itemAdded, itemRemoved } from "../../store/state/shoppingCart";
 
 const ItemCard = ({ item }) => {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.entities);
+
+  const handleAddItem = (item) => {
+    dispatch(itemAdded(item));
+  };
+
+  const handleRemoveItem = (item) => {
+    dispatch(itemRemoved(item));
+  };
+
   return (
     <>
       <Grid item>
@@ -28,11 +34,14 @@ const ItemCard = ({ item }) => {
             className="card-img-top"
             alt="Apple Computer"
           />
-          <div className="card-body">
+          <div
+            style={{ position: "absolute", bottom: "30px", width: "100%" }}
+            className="card-body"
+          >
             <div className="text-center">
               <h5 className="card-title">{item.title}</h5>
             </div>
-            <div>
+            <div className="mt-3">
               <div className="d-flex justify-content-between mb-2">
                 <span>Rating</span>
                 <span>
@@ -65,12 +74,12 @@ const ItemCard = ({ item }) => {
                   </Grid>
                 </span>
               </div>
-              <div className="d-flex justify-content-between mb-2">
+              <div className="d-flex justify-content-between mb-1">
                 <span>Category</span>
                 <span>{titleCase(item.category)}</span>
               </div>
             </div>
-            <div className="d-flex justify-content-between  total font-weight-bold mb-2">
+            <div className="d-flex justify-content-between  total font-weight-bold mb-1">
               <span>Price</span>
               <span>
                 <Grid
@@ -86,11 +95,21 @@ const ItemCard = ({ item }) => {
                 </Grid>
               </span>
             </div>
-            <div
-              style={{ position: "absolute", bottom: "10px" }}
-              className="d-flex justify-content-between align-items-center mt-3 mb-1"
-            >
-              <button type="button" className="btn btn-primary">
+            <div className="d-flex justify-content-between align-items-center mt-3 mb-1">
+              <button
+                onClick={() => handleAddItem(item)}
+                type="button"
+                className="btn btn-primary"
+              >
+                Add
+                <ShoppingCartIcon />
+              </button>
+              <button
+                onClick={() => handleRemoveItem(item)}
+                type="button"
+                className="btn btn-primary"
+              >
+                Remove
                 <ShoppingCartIcon />
               </button>
             </div>

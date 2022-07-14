@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Card,
-  CardActions,
-  Grid,
-  Box,
-  CardContent,
-  CardMedia,
-  Button,
-  Typography,
-} from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { loadProducts } from "../store/state/products";
 import ItemCard from "./common/itemCard";
@@ -16,11 +7,12 @@ import ItemCard from "./common/itemCard";
 const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.entities.products);
+  const shoppingCart = useSelector((state) => state.entities.shoppingCart);
+
   useEffect(() => {
     dispatch(loadProducts());
   }, []);
 
-  console.log(products);
   return (
     <>
       <Box sx={{ margin: "2rem 5rem" }}>
