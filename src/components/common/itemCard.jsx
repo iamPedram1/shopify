@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Grid, Button, Chip } from "@mui/material";
 import { itemAdded, itemRemoved } from "../../store/state/shoppingCart";
-import { titleCase, showCount } from "../../services/service";
+import { titleCase, counter } from "../../services/service";
 import { useDispatch, useSelector } from "react-redux";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
@@ -12,18 +12,29 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 const ItemCard = ({ item }) => {
   // Local and Redux State
-  const [count, setCount] = useState(0);
   const dispatch = useDispatch();
   const shoppingCart = useSelector((state) => state.entities.shoppingCart);
   // Event Handlers
   const handleAddItem = (item) => {
-    setCount(count + 1);
     dispatch(itemAdded(item));
   };
   const handleRemoveItem = (item) => {
-    if (count !== 0) setCount(count - 1);
     dispatch(itemRemoved(item));
   };
+
+  // const counter = (item) => {
+  //   let index;
+  //   try {
+  //     shoppingCart.filter((i) => {
+  //       if (i.id === item.id) {
+  //         index = shoppingCart.indexOf(i);
+  //       }
+  //     });
+  //     return shoppingCart[index].count;
+  //   } catch (error) {
+  //     return 0;
+  //   }
+  // };
   // Render
   return (
     <>
@@ -107,7 +118,7 @@ const ItemCard = ({ item }) => {
               justifyContent="center"
               alignItems="center"
             >
-              {count === 0 ? (
+              {counter(item, shoppingCart) === 0 ? (
                 <Grid item>
                   <Button
                     variant="contained"
@@ -131,7 +142,7 @@ const ItemCard = ({ item }) => {
                   <Grid item>
                     <Chip
                       variant="outlined"
-                      label={showCount(item, shoppingCart)}
+                      label={counter(item, shoppingCart)}
                       color="secondary"
                       icon={<ShoppingCartIcon fontSize="small" />}
                     />

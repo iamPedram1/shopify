@@ -5,17 +5,15 @@ import {
   Box,
   IconButton,
   Badge,
-  Divider,
   Drawer,
   Typography,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
-
+import ProductDrawer from "./common/navBar/productDrawer";
+import MenuDrawer from "./common/navBar/menuDrawer";
 const navBarItems = [
   { name: "Home", to: "/" },
   { name: "Register", to: "/register" },
@@ -24,12 +22,14 @@ const navBarItems = [
 ];
 
 const NavBar = () => {
-  const cart = useSelector((state) => state.entities.shoppingCart);
-
+  // Local State , And Redux
   const [drawerDirection, setDrawerDirection] = useState({
     right: false,
+    left: false,
   });
+  const cart = useSelector((state) => state.entities.shoppingCart);
 
+  // Event Handlers
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -40,49 +40,8 @@ const NavBar = () => {
 
     setDrawerDirection({ ...drawerDirection, [anchor]: open });
   };
-  const list = (anchor) => (
-    <>
-      <Box sx={{ width: 250, padding: "1rem 0" }}>
-        <Grid
-          container
-          rowSpacing={2}
-          direction="column"
-          alignItems="flex-start"
-        >
-          <IconButton
-            sx={{ margin: "1rem 0 0" }}
-            onClick={toggleDrawer(anchor, false)}
-          >
-            <CloseIcon />
-          </IconButton>
-          {navBarItems.map((item, index) => (
-            <Grid item key={index}>
-              <NavLink
-                className="drawer__menu"
-                to={item.to}
-                onClick={toggleDrawer(anchor, false)}
-              >
-                {item.name}
-              </NavLink>
-            </Grid>
-          ))}
-          <Grid item sx={{ width: "100%" }}>
-            <Divider />
-          </Grid>
-          <Grid item sx={{ padding: "1rem", width: "100%" }}>
-            <Grid container direction="column" alignItems="center">
-              <Grid item>
-                <Typography variant="h3">Shopify</Typography>
-              </Grid>
-              <Grid item>
-                <ShopOutlinedIcon sx={{ fontSize: "10rem" }} />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Box>
-    </>
-  );
+
+  //Render
 
   return (
     <>
@@ -127,7 +86,10 @@ const NavBar = () => {
                   <Typography variant="h4">Shopify</Typography>
                 </Grid>
                 <Grid item>
-                  <IconButton sx={{ color: "#fff" }}>
+                  <IconButton
+                    sx={{ color: "#fff" }}
+                    onClick={toggleDrawer("left", true)}
+                  >
                     <Badge
                       badgeContent={cart.length !== 0 ? cart.length : "0"}
                       color="error"
@@ -148,7 +110,16 @@ const NavBar = () => {
           open={drawerDirection["right"]}
           onClose={toggleDrawer("right", false)}
         >
-          {list("right")}
+          {MenuDrawer("right", toggleDrawer, navBarItems)}
+        </Drawer>
+      </div>
+      <div>
+        <Drawer
+          anchor="left"
+          open={drawerDirection["left"]}
+          onClose={toggleDrawer("left", false)}
+        >
+          {ProductDrawer("left", toggleDrawer, cart)}
         </Drawer>
       </div>
     </>

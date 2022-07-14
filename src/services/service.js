@@ -1,3 +1,5 @@
+import { itemAdded, itemRemoved } from "../store/state/shoppingCart";
+
 export const titleCase = (str) => {
   let splitStr = str.toLowerCase().split(" ");
   for (let i = 0; i < splitStr.length; i++) {
@@ -19,14 +21,44 @@ export const calcTotalPrice = (array) => {
   return total;
 };
 
-export const showCount = (item, shoppingCartState) => {
+export const counter = (item, state) => {
   let index;
-  shoppingCartState.forEach((i) => {
+  try {
+    state.filter((i) => {
+      if (i.id === item.id) {
+        index = state.indexOf(i);
+      }
+    });
+    return state[index].count;
+  } catch (error) {
+    return 0;
+  }
+};
+
+export const showCount = (item, state) => {
+  let index;
+  state.filter((i) => {
     if (i.id === item.id) {
-      index = shoppingCartState.indexOf(i);
+      index = state.indexOf(i);
       return;
     }
   });
-  const count = shoppingCartState[index].count;
-  return count;
+  setTimeout(() => {
+    console.log("index", index);
+    try {
+      const result = state[index].count;
+      return result;
+    } catch (error) {
+      console.log("error", error);
+      return 0;
+    }
+  }, 2000);
+};
+
+// Event Handlers
+export const handleAddItem = (item, dispatch) => {
+  dispatch(itemAdded(item));
+};
+export const handleRemoveItem = (item, dispatch) => {
+  dispatch(itemRemoved(item));
 };

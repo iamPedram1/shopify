@@ -52,17 +52,3 @@ div.desktop__navbar {
     display: none;
   }
 }
-
-.cart__Btn {
-  padding: 0;
-  width: 30px;
-  height: 100%;
-  vertical-align: middle !important;
-  text-align: center !important;
-}
-
-.cart__badge {
-  padding: 0;
-  width: 30px;
-  height: 100% !important;
-}
