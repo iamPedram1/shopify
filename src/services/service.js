@@ -18,3 +18,15 @@ export const calcTotalPrice = (array) => {
   });
   return total;
 };
+
+export const showCount = (item, shoppingCartState) => {
+  let index;
+  shoppingCartState.forEach((i) => {
+    if (i.id === item.id) {
+      index = shoppingCartState.indexOf(i);
+      return;
+    }
+  });
+  const count = shoppingCartState[index].count;
+  return count;
+};

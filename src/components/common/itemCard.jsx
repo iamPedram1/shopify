@@ -1,25 +1,30 @@
 import { useState } from "react";
-import { Grid } from "@mui/material";
-import { titleCase } from "../../services/service";
+import { Grid, Button, Chip } from "@mui/material";
+import { itemAdded, itemRemoved } from "../../store/state/shoppingCart";
+import { titleCase, showCount } from "../../services/service";
 import { useDispatch, useSelector } from "react-redux";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { itemAdded, itemRemoved } from "../../store/state/shoppingCart";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const ItemCard = ({ item }) => {
+  // Local and Redux State
+  const [count, setCount] = useState(0);
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.entities);
-
+  const shoppingCart = useSelector((state) => state.entities.shoppingCart);
+  // Event Handlers
   const handleAddItem = (item) => {
+    setCount(count + 1);
     dispatch(itemAdded(item));
   };
-
   const handleRemoveItem = (item) => {
+    if (count !== 0) setCount(count - 1);
     dispatch(itemRemoved(item));
   };
-
+  // Render
   return (
     <>
       <Grid item>
@@ -27,12 +32,11 @@ const ItemCard = ({ item }) => {
           style={{ width: "370px", height: "500px", position: "relative" }}
           className="card text-black"
         >
-          <i className="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
           <img
             src={item.image}
             style={{ width: "100%", height: "40%", objectFit: "contain" }}
             className="card-img-top"
-            alt="Apple Computer"
+            alt="product"
           />
           <div
             style={{ position: "absolute", bottom: "30px", width: "100%" }}
@@ -95,24 +99,55 @@ const ItemCard = ({ item }) => {
                 </Grid>
               </span>
             </div>
-            <div className="d-flex justify-content-between align-items-center mt-3 mb-1">
-              <button
-                onClick={() => handleAddItem(item)}
-                type="button"
-                className="btn btn-primary"
-              >
-                Add
-                <ShoppingCartIcon />
-              </button>
-              <button
-                onClick={() => handleRemoveItem(item)}
-                type="button"
-                className="btn btn-primary"
-              >
-                Remove
-                <ShoppingCartIcon />
-              </button>
-            </div>
+            <Grid
+              container
+              sx={{ position: "relative", top: "20px" }}
+              spacing={2}
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+            >
+              {count === 0 ? (
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    endIcon={<ShoppingCartIcon />}
+                    onClick={() => handleAddItem(item)}
+                  >
+                    Add To Cart
+                  </Button>
+                </Grid>
+              ) : (
+                <>
+                  <Grid item>
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      onClick={() => handleAddItem(item)}
+                    >
+                      <AddIcon />
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Chip
+                      variant="outlined"
+                      label={showCount(item, shoppingCart)}
+                      color="secondary"
+                      icon={<ShoppingCartIcon fontSize="small" />}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      onClick={() => handleRemoveItem(item)}
+                    >
+                      <RemoveIcon />
+                    </Button>
+                  </Grid>
+                </>
+              )}
+            </Grid>
           </div>
         </div>
       </Grid>
