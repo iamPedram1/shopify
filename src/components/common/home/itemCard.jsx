@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { Grid, Button, Chip } from "@mui/material";
-import { itemAdded, itemRemoved } from "../../store/state/shoppingCart";
-import { titleCase, counter } from "../../services/service";
+import { itemAdded, itemRemoved } from "../../../store/state/shoppingCart";
+import { titleCase, counter } from "./../../../services/service";
 import { useDispatch, useSelector } from "react-redux";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
@@ -22,19 +21,6 @@ const ItemCard = ({ item }) => {
     dispatch(itemRemoved(item));
   };
 
-  // const counter = (item) => {
-  //   let index;
-  //   try {
-  //     shoppingCart.filter((i) => {
-  //       if (i.id === item.id) {
-  //         index = shoppingCart.indexOf(i);
-  //       }
-  //     });
-  //     return shoppingCart[index].count;
-  //   } catch (error) {
-  //     return 0;
-  //   }
-  // };
   // Render
   return (
     <>

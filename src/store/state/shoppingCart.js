@@ -1,5 +1,4 @@
-import { createSlice, createAction, current } from "@reduxjs/toolkit";
-import produce from "immer";
+import { createSlice } from "@reduxjs/toolkit";
 
 // Action Creater
 const slice = createSlice({
