@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Local Storage
+
+const addToLocalStorage = (value) => {
+  localStorage.setItem("cart", JSON.stringify(value));
+};
+
 // Action Creater
 const slice = createSlice({
   name: "shoppingCart",
@@ -14,6 +20,7 @@ const slice = createSlice({
           ...payload,
           count: 1,
         });
+        addToLocalStorage(cart);
       } else {
         cart.map((item) => {
           if (item.id === payload.id) {
@@ -23,12 +30,14 @@ const slice = createSlice({
         });
         if (itemItsInState) {
           cart[itemIndex].count = cart[itemIndex].count + 1;
+          addToLocalStorage(cart);
           return cart;
         } else {
           cart.push({
             ...payload,
             count: 1,
           });
+          addToLocalStorage(cart);
         }
       }
     },
@@ -45,10 +54,13 @@ const slice = createSlice({
           }
         }
       });
-
+      addToLocalStorage(cart);
       return updatedCart;
+    },
+    localStorageReceived: (cart, { payload }) => {
+      return (cart = payload);
     },
   },
 });
-export const { itemAdded, itemRemoved } = slice.actions;
+export const { itemAdded, itemRemoved, localStorageReceived } = slice.actions;
 export default slice.reducer;

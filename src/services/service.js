@@ -19,7 +19,7 @@ export const calcTotalPrice = (array) => {
       total += item.price;
     }
   });
-  return total;
+  return total.toFixed(2);
 };
 
 export const counter = (item, state) => {
@@ -37,12 +37,6 @@ export const counter = (item, state) => {
 };
 
 // Event Handlers
-export const handleAddItem = (item, dispatch) => {
-  dispatch(itemAdded(item));
-};
-export const handleRemoveItem = (item, dispatch) => {
-  dispatch(itemRemoved(item));
-};
 
 export const paginate = (items, pageNumber, pageSize) => {
   const startIndex = (pageNumber - 1) * pageSize;

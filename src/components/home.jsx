@@ -3,12 +3,13 @@ import { Grid, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { loadProducts } from "../store/state/products";
 import { paginate } from "../services/service";
+import { localStorageReceived } from "../store/state/shoppingCart";
 import ItemCard from "./common/home/itemCard";
 import Filter from "./common/home/filter";
 import Categories from "./common/home/categories";
 import SelectPagination from "./common/home/selectPagination";
-import _ from "lodash";
 import Pagination from "./common/home/pagination";
+import _ from "lodash";
 
 const Home = () => {
   // Local state and Redux Store
@@ -24,6 +25,11 @@ const Home = () => {
   // ComponentDidMount
   useEffect(() => {
     dispatch(loadProducts());
+    // Get Cart Data From Local Storage
+    const data = JSON.parse(localStorage.getItem("cart"));
+    if (data !== null) {
+      dispatch(localStorageReceived(data));
+    }
   }, []);
 
   const dataToPaginate = showCategory ? category : products;
