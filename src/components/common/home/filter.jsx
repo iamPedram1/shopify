@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, InputLabel, FormControl, MenuItem, Select } from "@mui/material";
 
-const Filter = ({ sortBy, handleSort, setSortBy }) => {
+const Filter = ({ sortBy, setSortBy, handleSort }) => {
   const handleChange = ({ target }) => {
     const { value } = target;
     setSortBy(value);

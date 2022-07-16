@@ -26,9 +26,11 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 
 const ProductDrawer = (anchor, toggleDrawer) => {
+  // Redux Setup
   const { shoppingCart } = useSelector((state) => state.entities);
   const dispatch = useDispatch();
   console.log("ProductDrawer", shoppingCart);
+  // Render
   return (
     <Box
       sx={{

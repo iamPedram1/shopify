@@ -1,5 +1,5 @@
-import _ from "lodash";
 import { itemAdded, itemRemoved } from "../store/state/shoppingCart";
+import _ from "lodash";
 
 export const titleCase = (str) => {
   let splitStr = str.toLowerCase().split(" ");
@@ -38,6 +38,14 @@ export const counter = (item, state) => {
 
 // Event Handlers
 
+export const handleAddItem = (item, dispatch) => {
+  dispatch(itemAdded(item));
+};
+export const handleRemoveItem = (item, dispatch) => {
+  dispatch(itemRemoved(item));
+};
+
+// Paginate
 export const paginate = (items, pageNumber, pageSize) => {
   const startIndex = (pageNumber - 1) * pageSize;
   return _(items).slice(startIndex).take(pageSize).value();

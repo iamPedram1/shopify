@@ -1,6 +1,10 @@
 import { Grid, Button, Chip } from "@mui/material";
-import { itemAdded, itemRemoved } from "../../../store/state/shoppingCart";
-import { titleCase, counter } from "./../../../services/service";
+import {
+  titleCase,
+  counter,
+  handleAddItem,
+  handleRemoveItem,
+} from "./../../../services/service";
 import { useDispatch, useSelector } from "react-redux";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
@@ -13,13 +17,6 @@ const ItemCard = ({ item }) => {
   // Local and Redux State
   const dispatch = useDispatch();
   const { shoppingCart } = useSelector((state) => state.entities);
-  // Event Handlers
-  const handleAddItem = (item) => {
-    dispatch(itemAdded(item));
-  };
-  const handleRemoveItem = (item) => {
-    dispatch(itemRemoved(item));
-  };
 
   // Render
   return (
@@ -109,7 +106,7 @@ const ItemCard = ({ item }) => {
                   <Button
                     variant="contained"
                     endIcon={<ShoppingCartIcon />}
-                    onClick={() => handleAddItem(item)}
+                    onClick={() => handleAddItem(item, dispatch)}
                   >
                     Add To Cart
                   </Button>
@@ -120,7 +117,7 @@ const ItemCard = ({ item }) => {
                     <Button
                       variant="outlined"
                       size="small"
-                      onClick={() => handleAddItem(item)}
+                      onClick={() => handleAddItem(item, dispatch)}
                     >
                       <AddIcon />
                     </Button>
@@ -137,7 +134,7 @@ const ItemCard = ({ item }) => {
                     <Button
                       variant="outlined"
                       size="small"
-                      onClick={() => handleRemoveItem(item)}
+                      onClick={() => handleRemoveItem(item, dispatch)}
                     >
                       <RemoveIcon />
                     </Button>
