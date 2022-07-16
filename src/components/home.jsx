@@ -2,38 +2,49 @@ import React, { useEffect, useState } from "react";
 import { Grid, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { loadProducts } from "../store/state/products";
+import { paginate } from "../services/service";
 import ItemCard from "./common/home/itemCard";
 import Filter from "./common/home/filter";
 import Categories from "./common/home/categories";
+import SelectPagination from "./common/home/selectPagination";
 import _ from "lodash";
+import Pagination from "./common/home/pagination";
 
 const Home = () => {
   // Local state and Redux Store
-  const [sortedData, setSortedData] = useState([]);
   const [sortBy, setSortBy] = useState("");
+  const [sortedData, setSortedData] = useState([]);
   const [showCategory, setShowCategory] = useState(false);
   const [category, setCategory] = useState([]);
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.entities.products);
+  const { currentPage, products, pageSize } = useSelector(
+    (state) => state.entities
+  );
 
   // ComponentDidMount
   useEffect(() => {
     dispatch(loadProducts());
   }, []);
 
-  const filtered = showCategory ? category : products;
+  const dataToPaginate = showCategory ? category : products;
+  const paginated =
+    sortedData.length !== 0
+      ? paginate(sortedData, currentPage, pageSize)
+      : paginate(dataToPaginate, currentPage, pageSize);
+
+  // const filtered = showCategory ? category : products;
 
   // Event Handlers
   const handleSort = (sortBy, ascOrDesc, isNested = false) => {
     if (sortBy === "nothing") return setSortedData([]);
     const sorted = _.orderBy(
-      filtered,
+      dataToPaginate,
       (item) => (isNested ? item.rating[sortBy] : item[sortBy]),
       ascOrDesc
     );
     setSortedData(sorted);
   };
-  console.log("Sort", sortBy);
+
   // Render
   return (
     <>
@@ -50,6 +61,7 @@ const Home = () => {
             setShowCategory={setShowCategory}
             setSortedData={setSortedData}
           />
+          <SelectPagination />
         </Grid>
       </Box>
       <Box sx={{ margin: "2rem 5rem" }}>
@@ -60,10 +72,15 @@ const Home = () => {
           justifyContent="center"
           alignItems="center"
         >
-          {sortedData.length === 0
-            ? filtered.map((item) => <ItemCard key={item.id} item={item} />)
-            : sortedData.map((item) => <ItemCard key={item.id} item={item} />)}
+          {paginated.map((item) => (
+            <ItemCard key={item.id} item={item} />
+          ))}
         </Grid>
+        {paginated.length > 0 && (
+          <Pagination
+            data={sortedData.length !== 0 ? sortedData : dataToPaginate}
+          />
+        )}
       </Box>
     </>
   );

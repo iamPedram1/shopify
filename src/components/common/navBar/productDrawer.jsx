@@ -10,16 +10,9 @@ import {
   CardActions,
   CardMedia,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
-import {
-  showCount,
-  handleAddItem,
-  handleRemoveItem,
-} from "./../../../services/service";
-import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { handleAddItem, handleRemoveItem } from "./../../../services/service";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
@@ -28,7 +21,6 @@ import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 
 const ProductDrawer = (anchor, toggleDrawer, cart) => {
   const shoppingCart = useSelector((state) => state.entities.shoppingCart);
-  console.log("Shopping Cart", shoppingCart);
   const dispatch = useDispatch();
 
   return (

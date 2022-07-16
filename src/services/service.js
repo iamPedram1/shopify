@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { itemAdded, itemRemoved } from "../store/state/shoppingCart";
 
 export const titleCase = (str) => {
@@ -35,30 +36,15 @@ export const counter = (item, state) => {
   }
 };
 
-export const showCount = (item, state) => {
-  let index;
-  state.filter((i) => {
-    if (i.id === item.id) {
-      index = state.indexOf(i);
-      return;
-    }
-  });
-  setTimeout(() => {
-    console.log("index", index);
-    try {
-      const result = state[index].count;
-      return result;
-    } catch (error) {
-      console.log("error", error);
-      return 0;
-    }
-  }, 2000);
-};
-
 // Event Handlers
 export const handleAddItem = (item, dispatch) => {
   dispatch(itemAdded(item));
 };
 export const handleRemoveItem = (item, dispatch) => {
   dispatch(itemRemoved(item));
+};
+
+export const paginate = (items, pageNumber, pageSize) => {
+  const startIndex = (pageNumber - 1) * pageSize;
+  return _(items).slice(startIndex).take(pageSize).value();
 };

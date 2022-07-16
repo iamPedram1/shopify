@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Grid, InputLabel, FormControl, MenuItem, Select } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { titleCase } from "./../../../services/service";
+import { pageChanged } from "../../../store/state/currentPage";
 
 const Categories = ({
   setCategory,
@@ -11,7 +12,7 @@ const Categories = ({
 }) => {
   // Redux Store
   const [selectCategory, setSelectCategory] = useState("");
-
+  const dispatch = useDispatch();
   const products = useSelector((state) => state.entities.products);
 
   // Event Handler
@@ -27,10 +28,11 @@ const Categories = ({
   const handleChange = ({ target }) => {
     const { value } = target;
     if (value === "nothing") return setShowCategory(false);
+    const categories = products.filter((item) => item.category === value);
     setSelectCategory(value);
     setShowCategory(true);
-    const categories = products.filter((item) => item.category === value);
     setCategory(categories);
+    dispatch(pageChanged(1));
     setSortedBy("nothing");
     setSortedData([]);
   };
