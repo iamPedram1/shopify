@@ -27,7 +27,7 @@ const NavBar = () => {
     right: false,
     left: false,
   });
-  const cart = useSelector((state) => state.entities.shoppingCart);
+  const { shoppingCart } = useSelector((state) => state.entities);
 
   // Event Handlers
   const toggleDrawer = (anchor, open) => (event) => {
@@ -91,7 +91,9 @@ const NavBar = () => {
                     onClick={toggleDrawer("left", true)}
                   >
                     <Badge
-                      badgeContent={cart.length !== 0 ? cart.length : "0"}
+                      badgeContent={
+                        shoppingCart.length !== 0 ? shoppingCart.length : "0"
+                      }
                       color="error"
                     >
                       <ShoppingCartOutlinedIcon />
@@ -119,7 +121,7 @@ const NavBar = () => {
           open={drawerDirection["left"]}
           onClose={toggleDrawer("left", false)}
         >
-          {ProductDrawer("left", toggleDrawer, cart)}
+          {ProductDrawer("left", toggleDrawer)}
         </Drawer>
       </div>
     </>

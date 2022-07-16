@@ -19,8 +19,8 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 
-const ProductDrawer = (anchor, toggleDrawer, cart) => {
-  const shoppingCart = useSelector((state) => state.entities.shoppingCart);
+const ProductDrawer = (anchor, toggleDrawer) => {
+  const { shoppingCart } = useSelector((state) => state.entities);
   const dispatch = useDispatch();
 
   return (
@@ -44,8 +44,8 @@ const ProductDrawer = (anchor, toggleDrawer, cart) => {
         justifyContent="center"
         alignItems="center"
       >
-        {cart.length !== 0 ? (
-          cart.map((item, index) => (
+        {shoppingCart.length !== 0 ? (
+          shoppingCart.map((item, index) => (
             <Grid item key={index}>
               <Card sx={{ width: 300, boxShadow: "0 0 0 1px #c3c3c3" }}>
                 <CardMedia

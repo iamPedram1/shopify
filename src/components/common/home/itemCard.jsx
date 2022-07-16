@@ -12,7 +12,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 const ItemCard = ({ item }) => {
   // Local and Redux State
   const dispatch = useDispatch();
-  const shoppingCart = useSelector((state) => state.entities.shoppingCart);
+  const { shoppingCart } = useSelector((state) => state.entities);
   // Event Handlers
   const handleAddItem = (item) => {
     dispatch(itemAdded(item));

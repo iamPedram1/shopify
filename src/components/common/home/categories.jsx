@@ -13,7 +13,7 @@ const Categories = ({
   // Redux Store
   const [selectCategory, setSelectCategory] = useState("");
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.entities.products);
+  const { products } = useSelector((state) => state.entities);
 
   // Event Handler
   const getCategories = () => {

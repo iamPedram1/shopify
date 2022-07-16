@@ -32,8 +32,6 @@ const Home = () => {
       ? paginate(sortedData, currentPage, pageSize)
       : paginate(dataToPaginate, currentPage, pageSize);
 
-  // const filtered = showCategory ? category : products;
-
   // Event Handlers
   const handleSort = (sortBy, ascOrDesc, isNested = false) => {
     if (sortBy === "nothing") return setSortedData([]);
