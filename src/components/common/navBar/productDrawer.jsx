@@ -1,8 +1,11 @@
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   Grid,
   Box,
   IconButton,
   Button,
+  Tooltip,
   Typography,
   Card,
   Chip,
@@ -10,13 +13,12 @@ import {
   CardActions,
   CardMedia,
 } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import CloseIcon from "@mui/icons-material/Close";
 import {
   handleAddItem,
   handleRemoveItem,
   calcTotalPrice,
 } from "./../../../services/service";
+import CloseIcon from "@mui/icons-material/Close";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
@@ -29,7 +31,8 @@ const ProductDrawer = (anchor, toggleDrawer) => {
   // Redux Setup
   const { shoppingCart } = useSelector((state) => state.entities);
   const dispatch = useDispatch();
-  console.log("ProductDrawer", shoppingCart);
+  //
+  const totalPrice = calcTotalPrice(shoppingCart);
   // Render
   return (
     <Box
@@ -72,7 +75,7 @@ const ProductDrawer = (anchor, toggleDrawer) => {
                     >
                       {item.title}
                     </Typography>
-                    <Typography variant="h5" component="div">
+                    <Typography variant="h6" component="div">
                       <Grid
                         container
                         spacing={0.5}
@@ -101,7 +104,7 @@ const ProductDrawer = (anchor, toggleDrawer) => {
                         </Grid>
                       </Grid>
                     </Typography>
-                    <Typography variant="h5" component="div">
+                    <Typography variant="h6" component="div">
                       <Grid container alignItems="center">
                         <AttachMoneyIcon
                           sx={{ position: "relative", bottom: "1px" }}
@@ -185,15 +188,38 @@ const ProductDrawer = (anchor, toggleDrawer) => {
         >
           <Grid container justifyContent="space-between" alignItems="flex-end">
             <Grid item>
-              <h5>Total: {calcTotalPrice(shoppingCart)}$ </h5>
+              <h5>Total: {totalPrice}$ </h5>
             </Grid>
             <Grid item>
-              <button type="button" class="btn btn-danger">
-                Check-out
-              </button>
-              {/* <Button variant="contained" endIcon={<ShoppingCartIcon />}>
-                Check-out
-              </Button> */}
+              {totalPrice < 0.1 ? (
+                <Tooltip
+                  title="Your Shopping Cart Is Empty"
+                  placement="top"
+                  arrow
+                >
+                  <div>
+                    <button
+                      disabled
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={toggleDrawer(anchor, false)}
+                    >
+                      Check-Out
+                    </button>
+                  </div>
+                </Tooltip>
+              ) : (
+                <Link to="/check-out">
+                  <button
+                    type="button"
+                    style={{ backgroundColor: "blue" }}
+                    className="btn btn-danger"
+                    onClick={toggleDrawer(anchor, false)}
+                  >
+                    Check-Out
+                  </button>
+                </Link>
+              )}
             </Grid>
           </Grid>
         </Box>

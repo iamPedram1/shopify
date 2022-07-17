@@ -25,13 +25,16 @@ const Home = () => {
   // ComponentDidMount
   useEffect(() => {
     dispatch(loadProducts());
+
     // Get Cart Data From Local Storage
     const data = JSON.parse(localStorage.getItem("cart"));
     if (data !== null) {
-      dispatch(localStorageReceived(data));
+      setTimeout(() => {
+        dispatch(localStorageReceived(data));
+      }, 2000);
     }
   }, []);
-
+  // Filtering and Paginate
   const dataToPaginate = showCategory ? category : products;
   const paginated =
     sortedData.length !== 0
@@ -48,7 +51,6 @@ const Home = () => {
     );
     setSortedData(sorted);
   };
-
   // Render
   return (
     <>
