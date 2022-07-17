@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  CssBaseline,
   Box,
   Container,
   Paper,
@@ -46,7 +45,6 @@ export default function Checkout() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
           variant="outlined"
