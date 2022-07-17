@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import {
   Avatar,
   Button,
-  CssBaseline,
   FormControlLabel,
   Checkbox,
   Grid,
@@ -51,7 +50,6 @@ const Login = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,

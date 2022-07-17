@@ -57,10 +57,10 @@ const slice = createSlice({
       addToLocalStorage(cart);
       return updatedCart;
     },
-    localStorageReceived: (cart, { payload }) => {
+    cartDataReceived: (cart, { payload }) => {
       return (cart = payload);
     },
   },
 });
-export const { itemAdded, itemRemoved, localStorageReceived } = slice.actions;
+export const { itemAdded, itemRemoved, cartDataReceived } = slice.actions;
 export default slice.reducer;

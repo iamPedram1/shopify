@@ -4,6 +4,7 @@ import products from "./state/products";
 import shoppingCart from "./state/shoppingCart";
 import currentPage from "./state/currentPage";
 import pageSize from "./state/pageSize";
+import wishlist from "./state/wishlist";
 
 export default combineReducers({
   user,
@@ -11,4 +12,5 @@ export default combineReducers({
   shoppingCart,
   currentPage,
   pageSize,
+  wishlist,
 });

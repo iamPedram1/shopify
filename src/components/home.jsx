@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { loadProducts } from "../store/state/products";
 import { paginate } from "../services/service";
-import { localStorageReceived } from "../store/state/shoppingCart";
+import { cartDataReceived } from "../store/state/shoppingCart";
+import { wishDataReceived } from "../store/state/wishlist";
 import ItemCard from "./common/home/itemCard";
 import Filter from "./common/home/filter";
 import Categories from "./common/home/categories";
@@ -27,10 +28,14 @@ const Home = () => {
     dispatch(loadProducts());
 
     // Get Cart Data From Local Storage
-    const data = JSON.parse(localStorage.getItem("cart"));
-    if (data !== null) {
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    const wishlist = JSON.parse(localStorage.getItem("wishlist"));
+    if (wishlist !== null) {
+      dispatch(wishDataReceived(wishlist));
+    }
+    if (cart !== null) {
       setTimeout(() => {
-        dispatch(localStorageReceived(data));
+        dispatch(cartDataReceived(cart));
       }, 2000);
     }
   }, []);
@@ -54,40 +59,52 @@ const Home = () => {
   // Render
   return (
     <>
-      <Box sx={{ margin: "2rem 5rem 0" }}>
-        <Grid container spacing={2} justifyContent="flex-start">
-          <Filter
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            handleSort={handleSort}
-          />
-          <Categories
-            setSortedBy={setSortBy}
-            setCategory={setCategory}
-            setShowCategory={setShowCategory}
-            setSortedData={setSortedData}
-          />
-          <SelectPagination />
-        </Grid>
-      </Box>
-      <Box sx={{ margin: "2rem 5rem" }}>
-        <Grid
-          container
-          direction="row"
-          spacing={3}
-          justifyContent="center"
-          alignItems="center"
-        >
-          {paginated.map((item) => (
-            <ItemCard key={item.id} item={item} />
-          ))}
-        </Grid>
-        {paginated.length > 0 && (
-          <Pagination
-            data={sortedData.length !== 0 ? sortedData : dataToPaginate}
-          />
-        )}
-      </Box>
+      {products.length === 0 ? (
+        <Box sx={{ marginTop: "10rem" }}>
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid item>
+              <CircularProgress />
+            </Grid>
+          </Grid>
+        </Box>
+      ) : (
+        <>
+          <Box sx={{ margin: "2rem 5rem 0" }}>
+            <Grid container spacing={2} justifyContent="flex-start">
+              <Filter
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+                handleSort={handleSort}
+              />
+              <Categories
+                setSortedBy={setSortBy}
+                setCategory={setCategory}
+                setShowCategory={setShowCategory}
+                setSortedData={setSortedData}
+              />
+              <SelectPagination />
+            </Grid>
+          </Box>
+          <Box sx={{ margin: "2rem 0" }}>
+            <Grid
+              container
+              direction="row"
+              spacing={3}
+              justifyContent="center"
+              alignItems="center"
+            >
+              {paginated.map((item) => (
+                <ItemCard key={item.id} item={item} />
+              ))}
+            </Grid>
+            {paginated.length > 0 && (
+              <Pagination
+                data={sortedData.length !== 0 ? sortedData : dataToPaginate}
+              />
+            )}
+          </Box>
+        </>
+      )}
     </>
   );
 };

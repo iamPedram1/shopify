@@ -212,7 +212,6 @@ const ProductDrawer = (anchor, toggleDrawer) => {
                 <Link to="/check-out">
                   <button
                     type="button"
-                    style={{ backgroundColor: "blue" }}
                     className="btn btn-danger"
                     onClick={toggleDrawer(anchor, false)}
                   >

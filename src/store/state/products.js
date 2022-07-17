@@ -17,7 +17,7 @@ const slice = createSlice({
   },
 });
 
-export const { productsReceived } = slice.actions;
+export const { productsReceived, productsReceiveFailed } = slice.actions;
 
 export default slice.reducer;
 
@@ -25,6 +25,7 @@ export const loadProducts = () => (dispatch) => {
   return dispatch(
     apiCallBegan({
       onSuccess: productsReceived.type,
+      onError: productsReceiveFailed.type,
     })
   );
 };

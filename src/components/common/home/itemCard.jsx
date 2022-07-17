@@ -1,4 +1,4 @@
-import { Grid, Button, Chip } from "@mui/material";
+import { Grid, Button, Chip, Tooltip, IconButton } from "@mui/material";
 import {
   titleCase,
   counter,
@@ -6,8 +6,10 @@ import {
   handleRemoveItem,
 } from "./../../../services/service";
 import { useDispatch, useSelector } from "react-redux";
+import { itemAdded, itemRemoved } from "../../../store/state/wishlist";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
@@ -16,9 +18,19 @@ import RemoveIcon from "@mui/icons-material/Remove";
 const ItemCard = ({ item }) => {
   // Local and Redux State
   const dispatch = useDispatch();
-  const { shoppingCart } = useSelector((state) => state.entities);
+  const { shoppingCart, wishlist } = useSelector((state) => state.entities);
+
+  // Check if item is in user wishlist
+  let exists;
+  for (let key of wishlist) {
+    if (key.id === item.id) {
+      exists = true;
+      break;
+    }
+  }
 
   // Render
+
   return (
     <>
       <Grid item>
@@ -26,6 +38,26 @@ const ItemCard = ({ item }) => {
           style={{ width: "370px", height: "500px", position: "relative" }}
           className="card text-black"
         >
+          {exists ? (
+            <Tooltip title="Remove From Wishlist" arrow placement="top">
+              <IconButton
+                onClick={() => dispatch(itemRemoved(item))}
+                sx={{ width: "30px", height: "30px" }}
+              >
+                <StarIcon sx={{ color: "orange" }} />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Add to Wishlist" arrow placement="top">
+              <IconButton
+                onClick={() => dispatch(itemAdded(item))}
+                sx={{ width: "30px", height: "30px" }}
+              >
+                <StarBorderIcon sx={{ color: "orange" }} />
+              </IconButton>
+            </Tooltip>
+          )}
+
           <img
             src={item.image}
             style={{ width: "100%", height: "40%", objectFit: "contain" }}

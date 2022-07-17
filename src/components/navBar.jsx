@@ -18,7 +18,8 @@ const navBarItems = [
   { name: "Home", to: "/" },
   { name: "Register", to: "/register" },
   { name: "Login", to: "/login" },
-  { name: "About Us", to: "/about-us" },
+  { name: "About Me", to: "/about-me" },
+  { name: "Wishlist", to: "/wishlist" },
 ];
 
 const NavBar = () => {

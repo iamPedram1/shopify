@@ -4,8 +4,6 @@ import * as Yup from "yup";
 import {
   Avatar,
   Button,
-  CssBaseline,
-  TextField,
   FormControlLabel,
   Grid,
   Box,
@@ -14,7 +12,6 @@ import {
   Checkbox,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CopyRight from "./common/copyright";
 import { Link } from "react-router-dom";
 import InputField from "./common/inputField";
@@ -61,7 +58,6 @@ const Register = () => {
   const onSubmit = (data) => console.log(data, "ERRORS", errors);
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <Box
         sx={{
           marginTop: 1,
