@@ -15,7 +15,7 @@ const api =
 
     try {
       const response = await axios.request({
-        baseURL: config.apiEndPoint,
+        baseURL: config.products,
         method,
         data,
       });

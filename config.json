@@ -1,3 +1,4 @@
 {
-  "apiEndPoint": "https://fakestoreapi.com/products/"
+  "products": "https://fakestoreapi.com/products/",
+  "apiEndPoint": "http://localhost:3900/api"
 }

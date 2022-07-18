@@ -11,7 +11,11 @@ import {
   Typography,
   Container,
 } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import config from "../config.json";
+import http from "../services/httpService";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import CopyRight from "../components/common/copyright";
 import InputField from "./../components/common/inputField";
@@ -30,6 +34,8 @@ const schema = Yup.object({
 });
 
 const Login = () => {
+  const route = useRouter();
+  console.log(route);
   const {
     register,
     handleSubmit,
@@ -46,13 +52,27 @@ const Login = () => {
   const { dirtyFields } = useFormState({
     control,
   });
-  const onSubmit = (data) => console.log(data, "ERRORS", errors);
+
+  const SignIn = async (user) => {
+    try {
+      const response = await http.post(config.apiEndPoint + "/auth", user);
+      localStorage.setItem("token", response.data);
+      route.push("/");
+    } catch (error) {
+      if (error && error.response.status === 400) {
+        toast.error(error.response.data);
+      }
+    }
+  };
+
+  const onSubmit = (data) => SignIn(data);
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{ backgroundColor: "#fff" }}>
+      <ToastContainer />
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 5,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -103,7 +123,7 @@ const Login = () => {
           </Grid>
         </Box>
       </Box>
-      <CopyRight sx={{ mt: 8, mb: 4 }} />
+      <CopyRight sx={{ mt: 5, pb: 5 }} />
     </Container>
   );
 };

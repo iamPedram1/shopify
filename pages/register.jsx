@@ -10,11 +10,13 @@ import {
 } from "@mui/material";
 import { useForm, useFormState } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
 import Link from "next/link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import CopyRight from "../components/common/copyright";
 import InputField from "../components/common/inputField";
+import http from "../services/httpService";
 
 const schema = Yup.object({
   firstName: Yup.string()
@@ -55,12 +57,37 @@ const Register = () => {
   const { dirtyFields } = useFormState({
     control,
   });
-  const onSubmit = (data) => console.log(data, "ERRORS", errors);
+
+  // Event Handler
+
+  const SignUp = async (user) => {
+    try {
+      await http.post(config.apiEndPoint + "/users", user);
+    } catch (error) {
+      if (error && error.response.status === 400) {
+        toast.error(error.response.data);
+      }
+    }
+  };
+
+  const onSubmit = (data) =>
+    SignUp({
+      email: data["email"],
+      password: data["password"],
+      name: data["firstName"],
+    });
+
+  //Render
   return (
-    <Container component="main" maxWidth="xs">
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{ backgroundColor: "#fff", marginBottom: "3rem" }}
+    >
+      <ToastContainer />
       <Box
         sx={{
-          marginTop: 1,
+          marginTop: 5,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -141,7 +168,7 @@ const Register = () => {
           </Grid>
         </Box>
       </Box>
-      <CopyRight sx={{ mt: 5 }} />
+      <CopyRight sx={{ mt: 5, pb: 5 }} />
     </Container>
   );
 };

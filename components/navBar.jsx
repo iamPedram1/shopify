@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AppBar,
   Grid,
@@ -15,6 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ProductDrawer from "./common/navBar/productDrawer";
 import MenuDrawer from "./common/navBar/menuDrawer";
 import styles from "../styles/Navbar.module.css";
+import jwtDecode from "jwt-decode";
 
 const navBarItems = [
   { name: "Home", to: "/" },
@@ -23,14 +24,32 @@ const navBarItems = [
   { name: "About Me", to: "/about-me" },
   { name: "Wishlist", to: "/wishlist" },
 ];
+const navBarItems2 = [
+  { name: "Home", to: "/" },
+  { name: "About Me", to: "/about-me" },
+  { name: "Wishlist", to: "/wishlist" },
+  { name: "Logout", to: "/log-out" },
+];
 
 const NavBar = () => {
   // Local State , And Redux
+  const [loggedIn, setLoggedIn] = useState(false);
   const [drawerDirection, setDrawerDirection] = useState({
     right: false,
     left: false,
   });
   const { shoppingCart } = useSelector((state) => state.entities);
+
+  // CDM
+  useEffect(() => {
+    const token = localStorage.getItem("token") || null;
+    if (token !== null) {
+      const decode = jwtDecode(token);
+      if (decode && decode.name) {
+        setLoggedIn(true);
+      }
+    }
+  }, []);
 
   // Event Handlers
   const toggleDrawer = (anchor, open) => (event) => {
@@ -65,13 +84,21 @@ const NavBar = () => {
                 alignItems="center"
                 className={styles.desktop__navbar}
               >
-                {navBarItems.map((item) => (
-                  <Grid item key={item.name}>
-                    <Link href={item.to}>
-                      <a className={styles.navbar__item}>{item.name}</a>
-                    </Link>
-                  </Grid>
-                ))}
+                {loggedIn
+                  ? navBarItems2.map((item) => (
+                      <Grid item key={item.name}>
+                        <Link href={item.to}>
+                          <a className={styles.navbar__item}>{item.name}</a>
+                        </Link>
+                      </Grid>
+                    ))
+                  : navBarItems.map((item) => (
+                      <Grid item key={item.name}>
+                        <Link href={item.to}>
+                          <a className={styles.navbar__item}>{item.name}</a>
+                        </Link>
+                      </Grid>
+                    ))}
               </Grid>
               {/* Mobile NavBar */}
               <Grid item className={styles.mobile__navbar}>
