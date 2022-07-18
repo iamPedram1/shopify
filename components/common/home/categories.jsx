@@ -37,7 +37,7 @@ const Categories = ({
     setSortedData([]);
   };
   return (
-    <Grid item xs={8} sm={6} md={4}>
+    <Grid item xs={6} sm={6} md={4}>
       <FormControl sx={{ width: "100%", backgroundColor: "#fff" }}>
         <InputLabel>Catagory</InputLabel>
         <Select value={selectCategory} onChange={handleChange} label="Category">

@@ -12,7 +12,7 @@ const Filter = ({ sortBy, setSortBy, handleSort }) => {
   };
 
   return (
-    <Grid item xs={8} sm={6} md={4}>
+    <Grid item xs={6} sm={6} md={4}>
       <FormControl sx={{ width: "100%", backgroundColor: "#fff" }}>
         <InputLabel>Filter By</InputLabel>
         <Select value={sortBy} label="Filter By" onChange={handleChange}>

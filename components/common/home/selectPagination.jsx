@@ -15,7 +15,7 @@ const SelectPagination = () => {
 
   return (
     <>
-      <Grid item xs={8} sm={6} md={4}>
+      <Grid item xs={12} sm={12} md={4}>
         <FormControl sx={{ width: "100%", backgroundColor: "#fff" }}>
           <InputLabel>Item Per Page</InputLabel>
           <Select
