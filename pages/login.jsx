@@ -11,10 +11,10 @@ import {
   Typography,
   Container,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import CopyRight from "./common/copyright";
-import InputField from "./common/inputField";
+import CopyRight from "../components/common/copyright";
+import InputField from "./../components/common/inputField";
 
 //Validation Schema
 const schema = Yup.object({
@@ -98,7 +98,7 @@ const Login = () => {
           </Button>
           <Grid container>
             <Grid item>
-              <Link to="/register">{"Don't have an account? Sign Up"}</Link>
+              <Link href="/register">{"Don't have an account? Sign Up"}</Link>
             </Grid>
           </Grid>
         </Box>

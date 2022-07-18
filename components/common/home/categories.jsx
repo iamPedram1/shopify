@@ -44,8 +44,8 @@ const Categories = ({
           <MenuItem value="nothing">
             <em>None</em>
           </MenuItem>
-          {getCategories().map((item, index) => (
-            <MenuItem key={index} value={item}>
+          {getCategories().map((item) => (
+            <MenuItem key={item} value={item}>
               {titleCase(item)}
             </MenuItem>
           ))}

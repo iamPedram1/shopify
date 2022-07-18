@@ -14,11 +14,10 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import TelegramIcon from "@mui/icons-material/Telegram";
-import myImg from "./../img/pedram.jpg";
 
 const used = [
   "React",
-  "React-Router-Dom",
+  "Next.js",
   "Redux(Toolkit)",
   "Material UI",
   "BootstrapV5",
@@ -27,6 +26,7 @@ const used = [
   "yup(Validation)",
   "axios",
 ];
+
 const AboutUs = () => {
   return (
     <>
@@ -58,7 +58,7 @@ const AboutUs = () => {
                       marginBottom: "15px",
                     }}
                     alt="Pedram"
-                    src={myImg}
+                    src="https://i.ibb.co/rHmMt6m/photo-2022-07-06-18-34-40.jpg"
                   />
                 </Grid>
                 <Grid item>
@@ -75,9 +75,9 @@ const AboutUs = () => {
                   </Typography>
                 </Grid>
                 <Grid item>
-                  <ul class="list-group">
-                    {used.map((item, index) => (
-                      <li key={index} class="list-group-item">
+                  <ul className="list-group">
+                    {used.map((item) => (
+                      <li key={item} className="list-group-item">
                         {item}
                       </li>
                     ))}

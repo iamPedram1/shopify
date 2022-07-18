@@ -1,6 +1,3 @@
-import { useForm, useFormState } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
 import {
   Avatar,
   Button,
@@ -11,10 +8,13 @@ import {
   Container,
   Checkbox,
 } from "@mui/material";
+import { useForm, useFormState } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import Link from "next/link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import CopyRight from "./common/copyright";
-import { Link } from "react-router-dom";
-import InputField from "./common/inputField";
+import CopyRight from "../components/common/copyright";
+import InputField from "../components/common/inputField";
 
 const schema = Yup.object({
   firstName: Yup.string()
@@ -134,7 +134,7 @@ const Register = () => {
           </Button>
           <Grid container justifyContent="flex-start">
             <Grid item>
-              <Link to="/login" variant="body2">
+              <Link href="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

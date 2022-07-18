@@ -1,11 +1,11 @@
 import { Grid, Box, Button, Chip, Tooltip, IconButton } from "@mui/material";
+import { useEffect } from "react";
 import {
   titleCase,
   counter,
   handleAddItem,
   handleRemoveItem,
 } from "../services/service";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   itemAdded,
@@ -58,7 +58,7 @@ const Wishlist = () => {
             alignItems="center"
           >
             {wishlist.map((item) => (
-              <Grid key={item.id} item>
+              <Grid key={item.title} item>
                 <div
                   style={{
                     width: "370px",

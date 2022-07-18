@@ -1,5 +1,5 @@
 import { Grid, Box, IconButton, Typography, Divider } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import Link from "next/link";
 import CloseIcon from "@mui/icons-material/Close";
 import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 
@@ -13,15 +13,15 @@ const MenuDrawer = (anchor, toggleDrawer, navBarItems) => {
         >
           <CloseIcon />
         </IconButton>
-        {navBarItems.map((item, index) => (
-          <Grid item key={index}>
-            <NavLink
+        {navBarItems.map((item) => (
+          <Grid key={item.name} item>
+            <Link
               className="drawer__menu"
-              to={item.to}
+              href={item.to}
               onClick={toggleDrawer(anchor, false)}
             >
               {item.name}
-            </NavLink>
+            </Link>
           </Grid>
         ))}
         <Grid item sx={{ width: "100%" }}>

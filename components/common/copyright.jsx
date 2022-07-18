@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
+import Link from "next/link";
 
 const CopyRight = (props) => {
   return (
     <Typography color="text.secondary" align="center" {...props}>
       {"Copyright © "}
-      <Link to="https://mui.com/">Shopify</Link> {new Date().getFullYear()}
+      <Link href="https://mui.com/">Shopify</Link> {new Date().getFullYear()}
       {"."}
     </Typography>
   );

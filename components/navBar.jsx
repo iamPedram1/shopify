@@ -8,12 +8,14 @@ import {
   Drawer,
   Typography,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import ProductDrawer from "./common/navBar/productDrawer";
 import MenuDrawer from "./common/navBar/menuDrawer";
+import styles from "../styles/Navbar.module.css";
+
 const navBarItems = [
   { name: "Home", to: "/" },
   { name: "Register", to: "/register" },
@@ -61,18 +63,18 @@ const NavBar = () => {
                 columnSpacing={4}
                 direction="row-reverse"
                 alignItems="center"
-                className="desktop__navbar"
+                className={styles.desktop__navbar}
               >
-                {navBarItems.map((item, index) => (
-                  <Grid item key={index}>
-                    <NavLink className="navbar__item" to={item.to}>
-                      {item.name}
-                    </NavLink>
+                {navBarItems.map((item) => (
+                  <Grid item key={item.name}>
+                    <Link href={item.to}>
+                      <a className={styles.navbar__item}>{item.name}</a>
+                    </Link>
                   </Grid>
                 ))}
               </Grid>
               {/* Mobile NavBar */}
-              <Grid item className="mobile__navbar">
+              <Grid item className={styles.mobile__navbar}>
                 <IconButton
                   onClick={toggleDrawer("right", true)}
                   sx={{ color: "#fff" }}

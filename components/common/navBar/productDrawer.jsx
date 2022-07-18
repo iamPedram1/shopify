@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import {
   Grid,
   Box,
@@ -57,8 +57,8 @@ const ProductDrawer = (anchor, toggleDrawer) => {
           alignItems="center"
         >
           {shoppingCart.length !== 0 ? (
-            shoppingCart.map((item, index) => (
-              <Grid item key={index}>
+            shoppingCart.map((item) => (
+              <Grid item key={item.title}>
                 <Card sx={{ width: 300, boxShadow: "0 0 0 1px #c3c3c3" }}>
                   <CardMedia
                     component="img"
@@ -209,7 +209,7 @@ const ProductDrawer = (anchor, toggleDrawer) => {
                   </div>
                 </Tooltip>
               ) : (
-                <Link to="/check-out">
+                <Link href="/check-out">
                   <button
                     type="button"
                     className="btn btn-danger"

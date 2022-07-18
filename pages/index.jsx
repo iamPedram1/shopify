@@ -5,11 +5,11 @@ import { loadProducts } from "../store/state/products";
 import { paginate } from "../services/service";
 import { cartDataReceived } from "../store/state/shoppingCart";
 import { wishDataReceived } from "../store/state/wishlist";
-import ItemCard from "./common/home/itemCard";
-import Filter from "./common/home/filter";
-import Categories from "./common/home/categories";
-import SelectPagination from "./common/home/selectPagination";
-import Pagination from "./common/home/pagination";
+import Filter from "../components/common/home/filter";
+import Categories from "./../components/common/home/categories";
+import ItemCard from "./../components/common/home/itemCard";
+import SelectPagination from "./../components/common/home/selectPagination";
+import Pagination from "./../components/common/home/pagination";
 import _ from "lodash";
 
 const Home = () => {
@@ -22,6 +22,13 @@ const Home = () => {
   const { currentPage, products, pageSize } = useSelector(
     (state) => state.entities
   );
+
+  // Filtering and Paginate
+  const dataToPaginate = showCategory ? category : products;
+  const paginated =
+    sortedData.length !== 0
+      ? paginate(sortedData, currentPage, pageSize)
+      : paginate(dataToPaginate, currentPage, pageSize);
 
   // ComponentDidMount
   useEffect(() => {
@@ -39,12 +46,6 @@ const Home = () => {
       }, 2000);
     }
   }, []);
-  // Filtering and Paginate
-  const dataToPaginate = showCategory ? category : products;
-  const paginated =
-    sortedData.length !== 0
-      ? paginate(sortedData, currentPage, pageSize)
-      : paginate(dataToPaginate, currentPage, pageSize);
 
   // Event Handlers
   const handleSort = (sortBy, ascOrDesc, isNested = false) => {
@@ -56,6 +57,8 @@ const Home = () => {
     );
     setSortedData(sorted);
   };
+
+  console.log(sortedData);
   // Render
   return (
     <>
