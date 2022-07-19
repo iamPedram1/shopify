@@ -19,11 +19,10 @@ const used = [
   "React",
   "Next.js",
   "Redux(Toolkit)",
-  "Material UI",
-  "BootstrapV5",
+  "Material UI & BootstrapV5",
+  "React-Hook-Form & yup",
+  "React-Toastify",
   "lodash",
-  "React-Hook-Form",
-  "yup(Validation)",
   "axios",
 ];
 

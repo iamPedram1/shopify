@@ -16,7 +16,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
 const ItemCard = ({ item }) => {
-  // Local and Redux State
+  // Local and Redux Setup
   const dispatch = useDispatch();
   const { shoppingCart, wishlist } = useSelector((state) => state.entities);
 

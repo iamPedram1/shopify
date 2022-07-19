@@ -10,7 +10,7 @@ const Categories = ({
   setSortedData,
   setSortedBy,
 }) => {
-  // Redux Store
+  // Redux Setup
   const [selectCategory, setSelectCategory] = useState("");
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.entities);

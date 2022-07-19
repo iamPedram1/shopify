@@ -4,7 +4,7 @@ import { pageChanged } from "../../../store/state/currentPage";
 import { pageSizeChanged } from "../../../store/state/pageSize";
 
 const SelectPagination = () => {
-  // Redux
+  // Redux Setup
   const dispatch = useDispatch();
   const { pageSize } = useSelector((state) => state.entities);
   // Event Handler

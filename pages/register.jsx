@@ -17,6 +17,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import CopyRight from "../components/common/copyright";
 import InputField from "../components/common/inputField";
 import http from "../services/httpService";
+import config from "../config.json";
+import { titleCase } from "./../services/service";
 
 const schema = Yup.object({
   firstName: Yup.string()
@@ -62,17 +64,17 @@ const Register = () => {
 
   const SignUp = async (user) => {
     try {
-      await http.post(config.apiEndPoint + "/users", user);
+      await http.post(config.apiEndPoint + "/register/", user);
     } catch (error) {
       if (error && error.response.status === 400) {
-        toast.error(error.response.data);
+        toast.error(titleCase(error.response.data.email));
       }
     }
   };
 
   const onSubmit = (data) =>
     SignUp({
-      email: data["email"],
+      email: data["email"].toLowerCase(),
       password: data["password"],
       name: data["firstName"],
     });
@@ -99,12 +101,7 @@ const Register = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box
-          component="form"
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-          sx={{ mt: 3 }}
-        >
+        <Box component="form" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <InputField
@@ -137,6 +134,7 @@ const Register = () => {
               <InputField
                 name="password"
                 errors={errors}
+                type="password"
                 fieldTouched={dirtyFields}
                 label="Password"
                 reactHookFormRegister={register}

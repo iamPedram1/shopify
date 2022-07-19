@@ -13,7 +13,7 @@ import Pagination from "./../components/common/home/pagination";
 import _ from "lodash";
 
 const Home = () => {
-  // Local state and Redux Store
+  // Local state and Redux Setup
   const [sortBy, setSortBy] = useState("");
   const [sortedData, setSortedData] = useState([]);
   const [showCategory, setShowCategory] = useState(false);
@@ -58,7 +58,6 @@ const Home = () => {
     setSortedData(sorted);
   };
 
-  console.log(sortedData);
   // Render
   return (
     <>

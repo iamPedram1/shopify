@@ -12,13 +12,13 @@ import {
   Container,
 } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import config from "../config.json";
 import http from "../services/httpService";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import CopyRight from "../components/common/copyright";
 import InputField from "./../components/common/inputField";
+import { titleCase } from "./../services/service";
 
 //Validation Schema
 const schema = Yup.object({
@@ -33,9 +33,13 @@ const schema = Yup.object({
     .max(15, "Passowrd Cannot be more than 15 character"),
 });
 
+if (typeof window === "object") {
+  if (localStorage.getItem("token") !== null) {
+    window.location = "/";
+  }
+}
+
 const Login = () => {
-  const route = useRouter();
-  console.log(route);
   const {
     register,
     handleSubmit,
@@ -55,17 +59,23 @@ const Login = () => {
 
   const SignIn = async (user) => {
     try {
-      const response = await http.post(config.apiEndPoint + "/auth", user);
-      localStorage.setItem("token", response.data);
-      route.push("/");
+      const { data } = await http.post(config.apiEndPoint + "/login/", user);
+      localStorage.setItem("token", data.token);
+      window.location = "/";
     } catch (error) {
       if (error && error.response.status === 400) {
-        toast.error(error.response.data);
+        toast.error(
+          titleCase(error.response.data.password || error.response.data.email)
+        );
       }
     }
   };
 
-  const onSubmit = (data) => SignIn(data);
+  const onSubmit = (data) =>
+    SignIn({
+      email: data["email"].toLowerCase(),
+      password: data["password"],
+    });
 
   return (
     <Container component="main" maxWidth="xs" sx={{ backgroundColor: "#fff" }}>
@@ -99,6 +109,7 @@ const Login = () => {
           />
           <InputField
             name="password"
+            type="password"
             errors={errors}
             fieldTouched={dirtyFields}
             label="Password"

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRouter } from "next/router";
 import {
   Box,
   Container,
@@ -14,8 +15,11 @@ import PaymentForm from "../components/common/checkout/paymentForm";
 import AddressForm from "../components/common/checkout/AddressForm";
 import ReviewForm from "../components/common/checkout/reviewForm";
 import CopyRight from "../components/common/copyright";
+import { useSelector } from "react-redux";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
+
+const theme = createTheme();
 
 function getStepContent(step) {
   switch (step) {
@@ -30,19 +34,66 @@ function getStepContent(step) {
   }
 }
 
-const theme = createTheme();
-
 export default function Checkout() {
+  // Local State , Redux Setup
+  const { products, checkout } = useSelector((item) => item.entities);
+  const { shipping, payment } = checkout;
   const [activeStep, setActiveStep] = React.useState(0);
+  const router = useRouter();
 
+  React.useEffect(() => {
+    if (products.length === 0) {
+      router.push("/");
+    }
+  }, []);
+
+  const includes = (data) => {
+    if (data === "shipping") {
+      console.log(shipping.firstName);
+      if (shipping.firstName === undefined || shipping.firstName.length < 1)
+        return false;
+      if (shipping.lastName === undefined || shipping.lastName.length < 1)
+        return false;
+      if (shipping.address === undefined || shipping.address.length < 1)
+        return false;
+      if (shipping.city === undefined || shipping.city.length < 1) return false;
+      if (shipping.country === undefined || shipping.country.length < 1)
+        return false;
+      return true;
+    } else {
+      if (payment.cardName === undefined || payment.cardName.length < 1)
+        return false;
+      if (payment.cardNumber === undefined || payment.cardNumber.length < 1)
+        return false;
+      if (payment.expireDate === undefined || payment.expireDate.length < 1)
+        return false;
+      if (payment.cvv === undefined || payment.cvv.length < 1) return false;
+      return true;
+    }
+  };
+
+  // Event Handlers
   const handleNext = () => {
+    if (activeStep === 0) {
+      if (shipping.length === 0) return;
+      if (shipping.length !== 0) {
+        if (includes("shipping") === false) return;
+      }
+    }
+    if (activeStep === 1) {
+      if (payment.length === 0) return;
+      if (payment.length !== 0) {
+        if (includes() === false) return;
+      }
+    }
+    console.log("Ejra Shod");
     setActiveStep(activeStep + 1);
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-
+  // Render
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
@@ -83,6 +134,7 @@ export default function Checkout() {
                   )}
 
                   <Button
+                    type="submit"
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}

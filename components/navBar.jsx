@@ -15,7 +15,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ProductDrawer from "./common/navBar/productDrawer";
 import MenuDrawer from "./common/navBar/menuDrawer";
 import styles from "../styles/Navbar.module.css";
-import jwtDecode from "jwt-decode";
 
 const navBarItems = [
   { name: "Home", to: "/" },
@@ -28,7 +27,7 @@ const navBarItems2 = [
   { name: "Home", to: "/" },
   { name: "About Me", to: "/about-me" },
   { name: "Wishlist", to: "/wishlist" },
-  { name: "Logout", to: "/log-out" },
+  { name: "Logout", to: "/logout" },
 ];
 
 const NavBar = () => {
@@ -44,10 +43,7 @@ const NavBar = () => {
   useEffect(() => {
     const token = localStorage.getItem("token") || null;
     if (token !== null) {
-      const decode = jwtDecode(token);
-      if (decode && decode.name) {
-        setLoggedIn(true);
-      }
+      setLoggedIn(true);
     }
   }, []);
 
