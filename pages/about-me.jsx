@@ -31,7 +31,7 @@ const AboutUs = () => {
     <>
       <Box sx={{ margin: "1rem 0" }}>
         <Grid container justifyContent="center" alignItems="center">
-          <Card sx={{ minWidth: 450, textAlign: "center" }}>
+          <Card className="aboutMe__card" sx={{ textAlign: "center" }}>
             <CardContent>
               <Grid
                 container

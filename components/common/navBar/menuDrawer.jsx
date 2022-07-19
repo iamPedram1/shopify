@@ -15,12 +15,13 @@ const MenuDrawer = (anchor, toggleDrawer, navBarItems) => {
         </IconButton>
         {navBarItems.map((item) => (
           <Grid key={item.name} item>
-            <Link
-              className="drawer__menu"
-              href={item.to}
-              onClick={toggleDrawer(anchor, false)}
-            >
-              <a style={{ margin: "0 2rem" }}>{item.name}</a>
+            <Link className="drawer__menu" href={item.to}>
+              <a
+                onClick={toggleDrawer(anchor, false)}
+                style={{ margin: "0 2rem" }}
+              >
+                {item.name}
+              </a>
             </Link>
           </Grid>
         ))}
