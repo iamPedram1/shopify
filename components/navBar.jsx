@@ -15,6 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ProductDrawer from "./common/navBar/productDrawer";
 import MenuDrawer from "./common/navBar/menuDrawer";
 import styles from "../styles/Navbar.module.css";
+import Head from "next/head";
 
 const navBarItems = [
   { name: "Home", to: "/" },
@@ -63,6 +64,10 @@ const NavBar = () => {
 
   return (
     <>
+      <Head>
+        <title>Shopfiy</title>
+      </Head>
+
       <AppBar position="sticky" sx={{ backgroundColor: "#000" }}>
         <Box margin="0.5rem 1rem">
           <Grid
