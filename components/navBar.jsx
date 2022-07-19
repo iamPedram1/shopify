@@ -89,7 +89,12 @@ const NavBar = () => {
                   ? navBarItems2.map((item) => (
                       <Grid item key={item.name}>
                         <Link href={item.to}>
-                          <a className={styles.navbar__item}>{item.name}</a>
+                          <a
+                            // style={{ margin: "3rem" }}
+                            className={styles.navbar__item}
+                          >
+                            {item.name}
+                          </a>
                         </Link>
                       </Grid>
                     ))

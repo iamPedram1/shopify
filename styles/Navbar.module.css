@@ -5,6 +5,7 @@
 }
 
 .navbar__item {
+  margin: 4rem;
   color: #fff;
   text-decoration: none;
 }

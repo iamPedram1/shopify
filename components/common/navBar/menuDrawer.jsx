@@ -20,7 +20,7 @@ const MenuDrawer = (anchor, toggleDrawer, navBarItems) => {
               href={item.to}
               onClick={toggleDrawer(anchor, false)}
             >
-              {item.name}
+              <a style={{ margin: "0 2rem" }}>{item.name}</a>
             </Link>
           </Grid>
         ))}
