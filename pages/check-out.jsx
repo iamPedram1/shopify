@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import PaymentForm from "../components/common/checkout/paymentForm";
+import PaymentForm from "./../components/common/checkout/paymentForm";
 import AddressForm from "../components/common/checkout/AddressForm";
 import ReviewForm from "../components/common/checkout/reviewForm";
 import CopyRight from "../components/common/copyright";

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Typography, List, ListItem, ListItemText, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import { calcTotalPrice } from "../../../services/service";
-export default function Review() {
+export default function ReviewForm() {
   const { shoppingCart, checkout } = useSelector((item) => item.entities);
   const { payment, shipping } = checkout;
 
