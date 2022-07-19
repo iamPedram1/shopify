@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 import {
   Box,
   Container,
@@ -12,10 +13,9 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PaymentForm from "./../components/common/checkout/paymentForm";
-import AddresForm from "./../components/common/checkout/addressForm";
+import AddressForm from "./../components/common/checkout/addressForm";
 import ReviewForm from "./../components/common/checkout/reviewForm";
 import CopyRight from "../components/common/copyright";
-import { useSelector } from "react-redux";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
