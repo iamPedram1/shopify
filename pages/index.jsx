@@ -62,7 +62,7 @@ const Home = () => {
   return (
     <>
       {products.length === 0 ? (
-        <Box sx={{ marginTop: "10rem" }}>
+        <Box sx={{ marginTop: "11rem", height: "200px" }}>
           <Grid container justifyContent="center" alignItems="center">
             <Grid item>
               <CircularProgress />
