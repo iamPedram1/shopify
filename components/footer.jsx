@@ -1,8 +1,8 @@
 import { Box, Grid, Tooltip, IconButton } from "@mui/material";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import TelegramIcon from "@mui/icons-material/Telegram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import GitHubIcon from "@mui/icons-material/Github";
+import TelegramIcon from "@mui/icons-material/Telegram";
 import Link from "next/link";
 import styles from "../styles/Footer.module.css";
 
