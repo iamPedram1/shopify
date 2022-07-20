@@ -59,7 +59,7 @@ const Login = () => {
 
   const SignIn = async (user) => {
     try {
-      const { data } = await http.post(config.apiEndPoint + "/login/", user);
+      const { data } = await http.post(config.apiEndPoint + "login/", user);
       localStorage.setItem("token", data.token);
       window.location = "/";
     } catch (error) {

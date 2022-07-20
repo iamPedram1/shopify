@@ -1,0 +1,9 @@
+.aboutMe__card {
+  min-width: 80vw;
+}
+
+@media screen and (min-width: 768px) {
+  .aboutMe__card {
+    min-width: 50vw;
+  }
+}

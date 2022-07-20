@@ -18,7 +18,7 @@ const MenuDrawer = (anchor, toggleDrawer, navBarItems) => {
             <Link className="drawer__menu" href={item.to}>
               <a
                 onClick={toggleDrawer(anchor, false)}
-                style={{ margin: "0 2rem" }}
+                style={{ margin: "0 2rem", fontWeight: "bold" }}
               >
                 {item.name}
               </a>
@@ -34,7 +34,7 @@ const MenuDrawer = (anchor, toggleDrawer, navBarItems) => {
               <Typography variant="h3">Shopify</Typography>
             </Grid>
             <Grid item>
-              <ShopOutlinedIcon sx={{ fontSize: "10rem" }} />
+              <ShopOutlinedIcon sx={{ fontSize: "10rem", color: "#FFA500" }} />
             </Grid>
           </Grid>
         </Grid>

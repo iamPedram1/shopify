@@ -64,7 +64,7 @@ const Register = () => {
 
   const SignUp = async (user) => {
     try {
-      await http.post(config.apiEndPoint + "/register/", user);
+      await http.post(config.apiEndPoint + "register/", user);
     } catch (error) {
       if (error && error.response.status === 400) {
         toast.error(titleCase(error.response.data.email));

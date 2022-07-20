@@ -14,7 +14,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import TelegramIcon from "@mui/icons-material/Telegram";
-
+import styles from "../styles/AboutMe.module.css";
 const used = [
   "React",
   "Next.js",
@@ -31,7 +31,7 @@ const AboutUs = () => {
     <>
       <Box sx={{ margin: "1rem 0" }}>
         <Grid container justifyContent="center" alignItems="center">
-          <Card className="aboutMe__card" sx={{ textAlign: "center" }}>
+          <Card className={styles.aboutMe__card} sx={{ textAlign: "center" }}>
             <CardContent>
               <Grid
                 container
@@ -121,10 +121,7 @@ const AboutUs = () => {
                   placement="bottom"
                   arrow
                 >
-                  <Link
-                    href="https://web.whatsapp.com/send?phone=989927459082"
-                    target="_blank"
-                  >
+                  <Link href="tg://resolve?domain=iam_Pedram1" target="_blank">
                     <IconButton>
                       <TelegramIcon sx={{ color: "#2DA3D5" }} />
                     </IconButton>
