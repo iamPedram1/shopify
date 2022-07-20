@@ -14,6 +14,7 @@ const Footer = () => {
           width: "100%",
           height: "450px",
           paddingTop: "5rem",
+          marginTop: "3rem",
           backgroundColor: "#222222",
         }}
       >
