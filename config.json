@@ -1,4 +1,4 @@
 {
   "products": "https://fakestoreapi.com/products/",
-  "apiEndPoint": "http://thepok3rface.pythonanywhere.com/"
+  "apiEndPoint": "https://thepok3rface.pythonanywhere.com/"
 }
