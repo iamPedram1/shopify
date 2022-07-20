@@ -25,7 +25,7 @@ const Footer = () => {
           sx={{ marginBottom: "3rem" }}
         >
           <Grid item>
-            <h4 style={{ color: "#fff", fontWeight: "bold" }}>Shopfiy</h4>
+            <h4 style={{ color: "#fff", fontWeight: "bold" }}>Shopify</h4>
           </Grid>
         </Grid>
         <Grid
