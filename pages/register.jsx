@@ -64,7 +64,9 @@ const Register = () => {
 
   const SignUp = async (user) => {
     try {
-      await http.post(config.apiEndPoint + "register/", user);
+      const { data } = await http.post(config.apiEndPoint + "register/", user);
+      localStorage.setItem("token", data.token);
+      window.location = "/"
     } catch (error) {
       if (error && error.response.status === 400) {
         toast.error(titleCase(error.response.data.email));
@@ -101,7 +103,12 @@ const Register = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box component="form" noValidate sx={{ mt: 3 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          sx={{ mt: 3 }}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <InputField
