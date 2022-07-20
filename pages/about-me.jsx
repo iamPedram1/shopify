@@ -70,7 +70,7 @@ const AboutUs = () => {
                     variant="body2"
                     sx={{ margin: "10px 0 15px", fontWeight: "bold" }}
                   >
-                    Things That I Used :
+                    Project Tech Stack and Utilities :
                   </Typography>
                 </Grid>
                 <Grid item>
